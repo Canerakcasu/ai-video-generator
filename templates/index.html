@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Video Generator</title>
+</head>
+<body>
+    <h1>AI Destekli Video Üretici</h1>
+    <form id="videoForm">
+        <label for="topic">Konu:</label>
+        <input type="text" id="topic" name="topic">
+        <button type="submit">Video Oluştur</button>
+    </form>
+    <p id="message"></p>
+    <video id="videoPlayer" controls style="display:none;"></video>
+
+    <script>
+        document.getElementById("videoForm").onsubmit = async function(event) {
+            event.preventDefault();
+            const topic = document.getElementById("topic").value;
+            const response = await fetch("/generate_video", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ topic })
+            });
+            const data = await response.json();
+            if (data.video_url) {
+                document.getElementById("videoPlayer").src = data.video_url;
+                document.getElementById("videoPlayer").style.display = "block";
+                document.getElementById("message").innerText = "Video oluşturuldu!";
+            } else {
+                document.getElementById("message").innerText = "Hata: " + data.error;
+            }
+        };
+    </script>
+</body>
+</html>
