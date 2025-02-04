@@ -13,8 +13,8 @@ app = Flask(__name__)
 # .env dosyasını yükle
 load_dotenv()
 # OpenAI API Anahtarı
-openai.api_key = os.getenv("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")
-PEXELS_API_KEY = "tZRt6Uq308HvzCEreGdFQsW2VHfbjeA2JGYI790ceVDgYjUXwGacvnSD"
+openai.api_key = os.getenv("YOUR API KEY HERE")
+PEXELS_API_KEY = "YOUR API KEY HERE"
 
 # OpenAI API anahtarını ayarlama
 openai.api_key = openai.api_key
